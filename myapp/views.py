@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.views import generic
 from django.http import HttpResponse
 from .forms import InputForm
@@ -24,15 +24,30 @@ class PlayerList(generic.ListView):
     model = Player
     ordering = 'name'
 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     pk = self.kwargs['pk']
+    #     team = get_object_or_404(Team, pk=pk)
+    #     players = get_list_or_404(Player, team=team)
+    #     context['team'] = team
+    #     context['player_list'] = players
+    #     return context
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # print(context)
+        print('context: ', context)
         context['team'] = self.team
         return context
 
     def get_queryset(self):
-        team = self.team = get_object_or_404(Team, pk=self.kwargs['pk'])
+        pk = self.kwargs['pk']
+        print('pk: ', pk)
+        team = self.team = get_object_or_404(Team, pk=pk)
+        print('team: ', team)
+        pre_queryset = super().get_queryset()
+        print('pre_queryset: ', pre_queryset)
         queryset = super().get_queryset().filter(team=team)
+        print('queryset: ', queryset)
         return queryset
 
 

@@ -6,12 +6,13 @@
 </head>
 <body>
     <h1>選手一覧</h1>
+    <h2>{{ team }}</h2>
     <ul>
         {% for player in player_list %}
             <li><a href="">{{ player.name }}</a></li>
         {% empty %}
-            <li>選手が設定されていません。</li>
+            <li>チームが設定されていません。</li>
         {% endfor %}
-
+    </ul>
 </body>
 </html>
