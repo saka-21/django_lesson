@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>選手一覧</h1>
+    <ul>
+        {% for player in player_list %}
+            <li><a href="">{{ player.name }}</a></li>
+        {% empty %}
+            <li>選手が設定されていません。</li>
+        {% endfor %}
+
+</body>
+</html>
